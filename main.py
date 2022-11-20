@@ -12,10 +12,10 @@ from datetime import datetime
 app = FastAPI()
 
 locale = {language:HoroscopeKeeper(language) for language in LANGUAGES.__members__.keys()}
-default = locale['np']
+default = locale['hi']
 
 @app.get('/rashifall/{rashi}/')
-def get_rashifall(rashi: str, language: str = 'en'):
+def get_rashifall(rashi: str, language: str = 'hi'):
 
     if language not in LANGUAGES.__members__.keys():
         return JSONResponse(
@@ -52,7 +52,7 @@ def get_rashifall(rashi: str, language: str = 'en'):
 
 
     if default.today != datetime.today().date() or not default.cached:
-        default.data = RashiFetch.get_rashi()
+        default.data = RashiFetch.get_rashi_in_hindi()
         default.cached = True
         default.today = datetime.today().date()
 
