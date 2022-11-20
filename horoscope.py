@@ -1,7 +1,8 @@
-from drivers import WebDriver
 from datetime import datetime
 from conf import settings
 import requests
+from bs4 import BeautifulSoup as Soup
+import re
 
 RASHIS = [
         ("aries","mesh","mess","mace"),
@@ -10,7 +11,7 @@ RASHIS = [
         ("cancer","kark"),
         ("leo","sinh","singh"),
         ("virgo","kanya"),
-        ("libra","tula"),
+        ("libra","tula","tulaa"),
         ("scorpio","vrishchak"),
         ("sagittarius","dhanu","dhanus"),
         ("capricorn","makar"),
@@ -66,14 +67,15 @@ class RashiFetch:
             return RASHIS[number-1][0]
 
     @staticmethod
-    def get_rashi():
-        with WebDriver() as driver:
-            browser = driver.browser
-            browser.get('https://nepalipatro.com.np/rashifal')
-            RASHIFALL = {}
-            for horoscope, *_ in RASHIS:
-                text = browser.find_element('id',horoscope).text.split('\n')[-1]
-                RASHIFALL[horoscope] = text
+    def get_rashi_in_hindi():
+
+        document = Soup(requests.get('https://hindi.webdunia.com/astrology-daily-horoscope').content, 'html.parser')
+        rashis = document.find_all('div', class_='zdc_daily')
+
+        RASHIFALL = {}
+        for index, (horoscope, *_) in enumerate(RASHIS):
+            text = re.sub(r'।\t.*\n.*','।', re.sub(r'\n\n\n.*\r\n\t\t\t\t\t','', rashis[index].text)).strip()
+            RASHIFALL[horoscope] = text
 
         return RASHIFALL
 
