@@ -101,8 +101,9 @@ class RashiFetch:
             response_data[horoscope] = response.json().get('translated_text').get(self.language)
             if self.language=='ne':
                 response_data[horoscope] = response_data[horoscope].replace('छ ', ' छ ') \
+                                                                   .replace('छ।', ' छ ।') \
                                                                    .replace('छन् ', ' छन् ') \
-                                                                   .replace('क्छ' , ' क्छ') \
+                                                                   .replace('क्छ' , ' क छ') \
                                                                    .replace('छन्', ' छन्')
 
         return response_data
