@@ -104,8 +104,6 @@ class RashiFetch:
                                                                    .replace('छन् ', ' छन् ') \
                                                                    .replace('क्छ' , ' क्छ') \
                                                                    .replace('छन्', ' छन्')
-                print(response_data[horoscope])
-                exit()
 
         return response_data
 
