@@ -12,7 +12,7 @@ from datetime import datetime
 app = FastAPI()
 
 locale = {language:HoroscopeKeeper(language) for language in LANGUAGES.__members__.keys()}
-default = locale['hi']
+default = locale[settings.DEFAULT_LANGUAGE]
 
 @app.get('/rashifall/{rashi}/')
 def get_rashifall(rashi: str, language: str = 'hi'):
