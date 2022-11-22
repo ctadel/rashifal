@@ -79,7 +79,7 @@ class RashiFetch:
 
         return RASHIFALL
 
-    def translate(self, data: dict, from_language = 'np'):
+    def translate(self, data: dict, from_language = settings.DEFAULT_LANGUAGE):
 
         querystring = {
                 "protected_words":'$',
@@ -99,6 +99,13 @@ class RashiFetch:
                     params=querystring
                 )
             response_data[horoscope] = response.json().get('translated_text').get(self.language)
+            if self.language=='ne':
+                response_data[horoscope] = response_data[horoscope].replace('छ ', ' छ ') \
+                                                                   .replace('छन् ', ' छन् ') \
+                                                                   .replace('क्छ' , ' क्छ') \
+                                                                   .replace('छन्', ' छन्')
+                print(response_data[horoscope])
+                exit()
 
         return response_data
 
