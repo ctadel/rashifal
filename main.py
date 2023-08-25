@@ -14,6 +14,17 @@ app = FastAPI()
 locale = {language:HoroscopeKeeper(language) for language in LANGUAGES.__members__.keys()}
 default = locale[settings.DEFAULT_LANGUAGE]
 
+@app.get('/')
+def index():
+    return JSONResponse(
+            status_code = status.HTTP_200_OK,
+            content = dict(
+                status = 'PASS',
+                message = {'god':'tathastu!'}
+            ),
+        )
+
+
 @app.get('/rashifall/{rashi}/')
 def get_rashifall(rashi: str, language: str = 'hi'):
 
