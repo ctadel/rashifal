@@ -1,9 +1,7 @@
 from fastapi import FastAPI, status, Request
 from fastapi.responses import JSONResponse
 
-from selenium.webdriver.support.ui import Select
-
-from drivers import WebDriver
+# from drivers import WebDriver
 from conf import LANGUAGES, settings
 from horoscope import RashiFetch, HoroscopeKeeper
 

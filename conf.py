@@ -1,14 +1,11 @@
 from enum import Enum
-from pydantic import BaseSettings
 from pathlib import Path
 from dotenv import load_dotenv
 import os
 
-env_path = Path('.env')
+load_dotenv()
 
-load_dotenv(dotenv_path=env_path)
-
-class Settings(BaseSettings):
+class Settings:
     PRODUCTION = True
     CHROME_BINARY = '/opt/google/chrome/webdriver'
 

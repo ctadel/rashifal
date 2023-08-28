@@ -1,12 +1,10 @@
-FROM python:3.9-alpine
+FROM python:3.11-alpine3.18
 
 WORKDIR /app
 
-COPY ./requirements.txt /app/requirements.txt
+COPY . /app
 
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
-
-COPY . /app
 
 EXPOSE 8008
 
